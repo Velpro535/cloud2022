@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dsl.springcloud.dao.PaymentDao">
+
+    <insert id="create" parameterType="com.dsl.springcloud.entities.Payment" useGeneratedKeys="true" keyProperty="id">
+        insert into payment(serial) values(#{serial})
+    </insert>
+
+    <!--在公司中使用resultMap会更好一些，因为数据库总有人用别的别名，所以还是用映射会好一些，用type可能会找不到
+    至于paramterType，配置文件中写了，系统会自动在实体类中扫描，所以找得到
+    还有为什么insert要使用int类型，就因为如果插入成功会返回一个int类型的数字useGeneratedKeys-->
+
+    <resultMap id="BaseResultMap" type="com.dsl.springcloud.entities.Payment">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <id column="serial" property="serial" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getPaymentById" parameterType="Long" resultMap="BaseResultMap">
+        select * from payment where id=#{id};
+    </select>
+
+</mapper>
