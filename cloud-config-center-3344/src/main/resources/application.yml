@@ -1,0 +1,34 @@
+server:
+  port: 3344
+
+spring:
+  application:
+    name:  cloud-config-center #注册进Eureka服务器的微服务名
+  cloud:
+    config:
+      server:
+        git:
+          #          以下两步均需要在idea的插件中配置gitee
+          # 方式1 通过ssh登录
+          #          uri: git@github.com:GuoWeiChi/turorial-spring-cloud-config.git #GitHub上面的git仓库名字
+          uri: https://github.com/Velpro535/cloud2022.git #Gitee上面的git仓库名字
+          #          ###搜索目录
+          search-paths:
+            - cloud2022
+          # 方式2 通过账号登录
+          username: Velpro535
+          password: 13530558753li
+        #          uri: https://gitee.com/codinginn/turorial-spring-cloud-config.git #GitHub上面的git仓库名字
+        #          search-paths:
+        #            - turorial-spring-cloud-config
+        #          username: yourusername
+        #          password: yourpassword
+
+        ####读取分支
+        label: master
+
+#服务注册到eureka地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
